@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">UTS_Project</string>
+
+    <string-array name="list_Komik">
+        <item>One piece</item>
+        <item>Black Clover</item>
+        <item>NARUTO</item>
+    </string-array>
+    <string-array name="description">
+        <item>INI ONE PIECE</item>
+        <item>INI BLACK CLOVER</item>
+        <item>INI NARUTO</item>
+    </string-array>
 </resources>
