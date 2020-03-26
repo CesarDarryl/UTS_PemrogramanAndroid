@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLayout">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
@@ -82,19 +83,6 @@
                     app:layout_constraintLeft_toLeftOf="@+id/textView_title"
                     app:layout_constraintRight_toRightOf="@+id/textView_title"
                     />
-
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:background="@drawable/round_button"
-                    android:text="Lihat Film"
-                    android:textColor="#404040"
-                    app:layout_constraintLeft_toLeftOf="@id/textView_description"
-                    app:layout_constraintRight_toRightOf="@+id/textView_description"
-                    app:layout_constraintTop_toTopOf="@+id/textView_description"
-                    android:onClick="handleButtonLihatFilm"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

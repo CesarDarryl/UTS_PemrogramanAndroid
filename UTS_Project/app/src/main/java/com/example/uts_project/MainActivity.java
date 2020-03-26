@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         recyclerView = findViewById(R.id.recyclerview);
         //get resource to store string variabel
         data1 = getResources().getStringArray(R.array.list_Komik);
@@ -27,9 +28,5 @@ public class MainActivity extends AppCompatActivity {
         SimpleAdapter simpleAdapter = new SimpleAdapter(this,data1,data2,images);
         recyclerView.setAdapter(simpleAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    public void handleButtonLihatFilm(View view) {
-        //TODO : Intent kan ke Page lain
     }
 }
