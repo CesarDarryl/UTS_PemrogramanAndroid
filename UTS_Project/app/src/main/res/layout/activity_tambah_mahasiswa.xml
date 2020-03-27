@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cons_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/background_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_sub" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cons_sub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="@+id/cons_main"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="@+id/cons_main"
+        app:layout_constraintRight_toRightOf="@+id/cons_main"
+        app:layout_constraintTop_toTopOf="@+id/cons_main"
+        app:layout_constraintVertical_bias="0.0">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_name_space"
+            android:layout_width="356dp"
+            android:layout_height="48dp"
+            app:layout_constraintBottom_toBottomOf="@+id/cons_sub"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintLeft_toLeftOf="@+id/cons_sub"
+            app:layout_constraintRight_toRightOf="@+id/cons_sub"
+            app:layout_constraintTop_toTopOf="@+id/cons_sub"
+            app:layout_constraintVertical_bias="0.18">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nama Lengkap" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_alamat_space"
+            android:layout_width="356dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="36dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="@id/input_name_space"
+            app:layout_constraintRight_toRightOf="@+id/input_name_space"
+            app:layout_constraintTop_toBottomOf="@+id/input_name_space">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Alamat dan Data diri" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnSimpan"
+            android:layout_width="367dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:text="Konfirmasi"
+            android:textColor="#FFFFFF"
+            android:onClick="button_onClick"
+            android:background="@drawable/round_button_confirm"
+            app:layout_constraintBottom_toTopOf="@+id/btnBatal"
+            app:layout_constraintEnd_toEndOf="@+id/btnBatal"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/btnBatal" />
+
+        <Button
+            android:id="@+id/btnBatal"
+            android:layout_width="367dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="232dp"
+            android:text="Cancel"
+            android:textColor="#FFFFFF"
+            android:onClick="button_onClick"
+            android:background="@drawable/round_button_cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
