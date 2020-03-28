@@ -27,3 +27,5 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 }
+
+//TODO : REWRITE ALL THE .xml FILE ACTIVITY .
