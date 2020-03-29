@@ -1,22 +1,25 @@
 package com.example.try_recyclerview;
 
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class ExampleItem implements Parcelable {
-    private int mImageResource;
     private String mText1;
     private String mText2;
+    Uri pathImage;
 
 
-    public ExampleItem(int mImageResource, String mText1, String mText2) {
-        this.mImageResource = mImageResource;
+    public ExampleItem(){}
+    public ExampleItem(Uri pathImage, String mText1, String mText2) {
         this.mText1 = mText1;
         this.mText2 = mText2;
+        this.pathImage = pathImage;
     }
 
+
     protected ExampleItem(Parcel in) {
-        mImageResource = in.readInt();
+        this.pathImage = in.readParcelable(Uri.class.getClassLoader());
         mText1 = in.readString();
         mText2 = in.readString();
     }
@@ -34,12 +37,9 @@ public class ExampleItem implements Parcelable {
     };
 
     //SETTER GETTER
-    public int getmImageResource() {
-        return mImageResource;
-    }
 
-    public void setmImageResource(int mImageResource) {
-        this.mImageResource = mImageResource;
+    public Uri getPathImage() {
+        return pathImage;
     }
 
     public String getmText1() {
@@ -65,7 +65,7 @@ public class ExampleItem implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mImageResource);
+        dest.writeParcelable(this.pathImage, flags);
         dest.writeString(mText1);
         dest.writeString(mText2);
     }

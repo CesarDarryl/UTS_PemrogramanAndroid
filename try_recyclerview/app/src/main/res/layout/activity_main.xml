@@ -13,7 +13,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -22,15 +21,18 @@
         android:padding="4dp"
         android:scrollbars="vertical" />
 
-    <Button
-        android:id="@+id/button_insert"
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_button_insert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/recyclerview"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="163dp"
-        android:layout_marginBottom="-69dp"
-        android:text="Insert" />
+        android:layout_below="@+id/recyclerview"
+        app:fabSize="auto"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-109dp"
+        android:layout_marginEnd="0dp"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_control_point_black_24dp" />
 
 
 </RelativeLayout>

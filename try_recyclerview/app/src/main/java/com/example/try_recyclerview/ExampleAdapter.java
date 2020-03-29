@@ -24,37 +24,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         mListener = listener;
     }
 
-    public static class ExampleViewHolder extends  RecyclerView.ViewHolder
-    {
-        public ImageView mImageView;
-        public TextView mTextView1;
-        public TextView mTextView2;
 
-        public ExampleViewHolder(View itemView, final onItemClickListener listener) {
-            super(itemView);
-            //REFERENCES TO LAYOUT
-            mImageView = itemView.findViewById(R.id.imageView);
-            mTextView1 = itemView.findViewById(R.id.textView1);
-            mTextView2 = itemView.findViewById(R.id.textView2);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //To pass the Static class is , Add in Constructor of the class
-
-                    //call Interface
-                    if(listener != null)
-                    {
-                        int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION)
-                        {
-                            listener.onItemClick(position);
-                        }
-                    }
-                }
-            });
-        }
-    }
     //TODO : Get DATA out of array list INTO Adapter. is to passit into constructor
     public ExampleAdapter(ArrayList<ExampleItem> exampleItems)
     {
@@ -80,13 +50,47 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         ExampleItem currentItem = mExampleList.get(position);
 
         //get information
-        holder.mImageView.setImageResource(currentItem.getmImageResource());
+//        holder.mImageView.setImageResource(currentItem.getPathImage());
         holder.mTextView1.setText(currentItem.getmText1());
         holder.mTextView2.setText(currentItem.getmText2());
     }
 
     @Override
     public int getItemCount() {
-        return mExampleList.size();
+        return (mExampleList != null) ? mExampleList.size() : 0;
     }
+
+    public static class ExampleViewHolder extends  RecyclerView.ViewHolder
+    {
+//        public ImageView mImageView;
+        public TextView mTextView1;
+        public TextView mTextView2;
+
+        public ExampleViewHolder(View itemView, final onItemClickListener listener) {
+            super(itemView);
+            //REFERENCES TO LAYOUT
+//            mImageView = itemView.findViewById(R.id.imageView);
+            mTextView1 = itemView.findViewById(R.id.textView1);
+            mTextView2 = itemView.findViewById(R.id.textView2);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //To pass the Static class is , Add in Constructor of the class
+
+                    //call Interface
+                    if(listener != null)
+                    {
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION)
+                        {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+
 }
