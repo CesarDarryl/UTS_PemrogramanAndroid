@@ -28,6 +28,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<ExampleItem> mExampleList;
 
+    private static final String TITLE = "title";
+    private static final String SUB_TITLE = "sub_title";
     public static final String KEY = "KEY";
     public static final int INSERT_REQUEST = 1;
     public static final String INDEX_KEY = "INDEX";
@@ -54,6 +56,14 @@ public class MainActivity extends AppCompatActivity {
         createExampleList();
         buildRecyclerView();
 
+        //GET THE ITEM BUNDLE
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+        {
+            baris1.setText(extras.getString(TITLE));
+            baris2.setText(extras.getString(SUB_TITLE));
+        }
+
         //onClickListener
         FloatingActionButton fab = findViewById(R.id.fab_button_insert);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +78,9 @@ public class MainActivity extends AppCompatActivity {
                 //this onClick is for adding the new Item. using setter getter from the Item
                 //TODO : using startActivityForResult
                 Intent intent = new Intent(MainActivity.this,RegisterActivity.class);
-                intent.putExtra(KEY,new ExampleItem());
-                startActivityForResult(intent,INSERT_REQUEST);
+                startActivity(intent);
+//                intent.putExtra(KEY,new ExampleItem());
+//                startActivityForResult(intent,INSERT_REQUEST);
             }
         });
 
@@ -90,33 +101,33 @@ public class MainActivity extends AppCompatActivity {
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK)
-        {
-            ExampleItem mExampleItem = data.getParcelableExtra(KEY);
-            if(requestCode == INSERT_REQUEST)
-            {
-                mAdapter.notifyDataSetChanged();
-                //TODO : Fix the Null Exception , because they dont know where exatcly the Filed is
-                baris1.setText(String.valueOf(mExampleItem.getmText1()));
-                baris2.setText(String.valueOf(mExampleItem.getmText2()));
-//                try
-//                {
-//                    mAdapter.notifyDataSetChanged();
-//                    baris1.setText(String.valueOf(mExampleItem.getmText1()));
-//                    baris2.setText(String.valueOf(mExampleItem.getmText2()));
-////                    Bitmap gambar = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mExampleItem.getPathImage());
-////                    avatar.setImageBitmap(gambar);
-//                }catch (IOException e)
-//                {
-//                    Toast.makeText(this, "Can't load image", Toast.LENGTH_SHORT).show();
-//                    Log.e(TAG, e.getMessage());
-//                }
-            }
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(resultCode == RESULT_OK)
+//        {
+//            ExampleItem mExampleItem = data.getParcelableExtra(KEY);
+//            if(requestCode == INSERT_REQUEST)
+//            {
+//                mAdapter.notifyDataSetChanged();
+//                //TODO : Fix the Null Exception , because they dont know where exatcly the Filed is
+//                baris1.setText(String.valueOf(mExampleItem.getmText1()));
+//                baris2.setText(String.valueOf(mExampleItem.getmText2()));
+////                try
+////                {
+////                    mAdapter.notifyDataSetChanged();
+////                    baris1.setText(String.valueOf(mExampleItem.getmText1()));
+////                    baris2.setText(String.valueOf(mExampleItem.getmText2()));
+//////                    Bitmap gambar = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mExampleItem.getPathImage());
+//////                    avatar.setImageBitmap(gambar);
+////                }catch (IOException e)
+////                {
+////                    Toast.makeText(this, "Can't load image", Toast.LENGTH_SHORT).show();
+////                    Log.e(TAG, e.getMessage());
+////                }
+//            }
+//        }
+//    }
 //    public void insertItem(int position)
 //    {
 //        //menambah ke Arraylist dikenali dengan nama mExampleList

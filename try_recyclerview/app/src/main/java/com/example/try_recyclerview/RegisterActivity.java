@@ -21,7 +21,8 @@ public class RegisterActivity extends AppCompatActivity {
     private static final int GALERY_REQUEST_CODE = 1;
     public static final String IMAGE_KEY = "image";
     private static final String TAG = RegisterActivity.class.getCanonicalName();
-
+    private static final String TITLE = "title";
+    private static final String SUB_TITLE = "sub_title";
 
     private Uri imageUri;
     private Bitmap bitmap = null;
@@ -88,19 +89,23 @@ public class RegisterActivity extends AppCompatActivity {
         String txt2 = line2.getText().toString();
 //        Uri path = imageUri;
 
-        Intent intent = new Intent();
-
-        if(!txt1.isEmpty() || !txt2.isEmpty())
-        {
-            intent.putExtra(MainActivity.KEY, item);
-            intent.putExtra(MainActivity.INDEX_KEY, index);
-//            intent.putExtra(MainActivity.IMAGE_KEY,path);
-            setResult(RESULT_OK,intent);
-            finish();
-        }else
-            {
-                Toast.makeText(this, "Data harus di lengkapi", Toast.LENGTH_SHORT).show();
-            }
-//        ExampleItem exampleItem = new ExampleItem(path,txt1,txt2);
+        Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+        intent.putExtra(TITLE,txt1);
+        intent.putExtra(SUB_TITLE,txt2);
+        startActivity(intent);
+//        Intent intent = new Intent();
+//
+//        if(!txt1.isEmpty() || !txt2.isEmpty())
+//        {
+//            intent.putExtra(MainActivity.KEY, item);
+//            intent.putExtra(MainActivity.INDEX_KEY, index);
+////            intent.putExtra(MainActivity.IMAGE_KEY,path);
+//            setResult(RESULT_OK,intent);
+//            finish();
+//        }else
+//            {
+//                Toast.makeText(this, "Data harus di lengkapi", Toast.LENGTH_SHORT).show();
+//            }
+////        ExampleItem exampleItem = new ExampleItem(path,txt1,txt2);
     }
 }
