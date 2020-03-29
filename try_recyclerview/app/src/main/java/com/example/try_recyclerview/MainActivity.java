@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,9 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayourManager; //Responsible align single item
 
     private Button buttonInsert;
-    private Button buttonRemove;
     private EditText ediTextInsert;
-    private EditText editTextRemove;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,29 +36,22 @@ public class MainActivity extends AppCompatActivity {
 
         //BINDING
         buttonInsert = findViewById(R.id.button_insert);
-        buttonRemove = findViewById(R.id.button_remove);
-        ediTextInsert = findViewById(R.id.edittext_insert);
-        editTextRemove = findViewById(R.id.edittext_remove);
 
         //onClickListener
         buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Here to get the position
-                int position = Integer.parseInt(ediTextInsert.getText().toString());
+//                int position = Integer.parseInt(ediTextInsert.getText().toString());
+                int position = 0;
                 //its Insert item
                 insertItem(position);
+
+                //this onClick is for adding the new Item. using setter getter from the Item
+                //TODO :
             }
         });
 
-        buttonRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = Integer.parseInt(editTextRemove.getText().toString());
-                //its Remove
-                removeItem(position);
-            }
-        });
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback  = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)  {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -72,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
                 removeItem(position);
             }
         };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
     public void insertItem(int position)
@@ -81,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         //Berhubung ngambil Gambar, jadi di tambahkan gambar yg di ingin kan
         mExampleList.add(position, new ExampleItem(R.drawable.ic_android,"New Item At Position"+position, "This is line 2"));
         mAdapter.notifyItemInserted(position);
+
+        //TODO : Inserting item Should open another Activity then pharsing the data
     }
     public void removeItem(int position)
     {
@@ -88,11 +85,12 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.notifyItemRemoved(position);
     }
 
-    public void changeItem(int position, String text)
-    {
-        mExampleList.get(position).changeText1(text);
-        mAdapter.notifyItemChanged(position);
-    }
+    //when clicked the item .
+//    public void changeItem(int position, String text)
+//    {
+//        mExampleList.get(position).changeText1(text);
+//        mAdapter.notifyItemChanged(position);
+//    }
 
     public void createExampleList(){
         mExampleList =  new ArrayList<>();
@@ -114,7 +112,11 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new ExampleAdapter.onItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                changeItem(position,"Clicked");
+                //this when your Clicked the item. it should open New Intent
+                Intent intent = new Intent(MainActivity.this,Activity2.class);
+                intent.putExtra("Example Item",mExampleList.get(position));
+                startActivity(intent);
+                //it should open The Acivity but with the value of deafult from the item
             }
         });
     }

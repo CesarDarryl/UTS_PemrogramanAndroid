@@ -10,50 +10,27 @@
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="4dp"
-        android:background="@android:color/darker_gray"
-        android:scrollbars="vertical"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         android:layout_marginBottom="100dp"
-        />
+        android:background="@android:color/darker_gray"
+        android:padding="4dp"
+        android:scrollbars="vertical" />
 
     <Button
         android:id="@+id/button_insert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/edittext_insert"
-        android:layout_marginStart="3dp"
-        android:layout_marginBottom="1dp"
-        android:layout_toEndOf="@+id/edittext_insert"
+        android:layout_alignBottom="@+id/recyclerview"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="163dp"
+        android:layout_marginBottom="-69dp"
         android:text="Insert" />
 
-    <EditText
-        android:id="@+id/edittext_insert"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="44dp"
-        android:inputType="number"/>
-
-    <Button
-        android:id="@+id/button_remove"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/edittext_remove"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="-1dp"
-        android:layout_toEndOf="@+id/edittext_remove"
-        android:text="remove" />
-
-    <EditText
-        android:id="@+id/edittext_remove"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="232dp"
-        android:layout_marginBottom="46dp"
-        android:inputType="number"/>
 
 </RelativeLayout>
