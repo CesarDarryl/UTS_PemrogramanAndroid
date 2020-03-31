@@ -9,11 +9,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder>{
-    private  ArrayList<ExampleItem> mExampleList;//getting information into adapter
+    private  List<ExampleItem> mExampleList;//getting information into adapter
     private  onItemClickListener mListener;
+
+
+    public ExampleAdapter(List<ExampleItem> mExampleList, onItemClickListener mListener) {
+        this.mExampleList = mExampleList;
+        this.mListener = mListener;
+    }
+
 
     public interface onItemClickListener
     {
@@ -42,6 +52,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
     }
 
+
     //TODO : PASSIT INFORMATION INSIDE This class
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
@@ -53,6 +64,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 //        holder.mImageView.setImageResource(currentItem.getPathImage());
         holder.mTextView1.setText(currentItem.getmText1());
         holder.mTextView2.setText(currentItem.getmText2());
+        ExampleItem item = mExampleList.get(position);
+        holder.bind(position,item);
     }
 
     @Override
@@ -89,6 +102,11 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
                     }
                 }
             });
+        }
+        public void bind(final int index,final ExampleItem item)
+        {
+            mTextView1.setText(item.getmText1());
+            mTextView2.setText(item.getmText2());
         }
     }
 

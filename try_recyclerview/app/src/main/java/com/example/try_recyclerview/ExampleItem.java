@@ -3,23 +3,38 @@ package com.example.try_recyclerview;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExampleItem implements Parcelable {
     private String mText1;
     private String mText2;
-    Uri pathImage;
+    private List<ExampleItem> anExampleItem;
+//    Uri pathImage;
 
-
-    public ExampleItem(){}
-    public ExampleItem(Uri pathImage, String mText1, String mText2) {
+    public ExampleItem(String mText1, String mText2) {
         this.mText1 = mText1;
         this.mText2 = mText2;
-        this.pathImage = pathImage;
+        this.anExampleItem = new ArrayList<>();
+//        this.pathImage = pathImage;
+    }
+
+    public ExampleItem() {
+
+    }
+
+    public void addItem(ExampleItem exampleitem)
+    {
+        mText1 = "ADUH";
+        mText2 = "MATANE";
+        anExampleItem.add(exampleitem);
     }
 
 
     protected ExampleItem(Parcel in) {
-        this.pathImage = in.readParcelable(Uri.class.getClassLoader());
+//        this.pathImage = in.readParcelable(Uri.class.getClassLoader());
         mText1 = in.readString();
         mText2 = in.readString();
     }
@@ -36,11 +51,12 @@ public class ExampleItem implements Parcelable {
         }
     };
 
+
     //SETTER GETTER
 
-    public Uri getPathImage() {
-        return pathImage;
-    }
+//    public Uri getPathImage() {
+//        return pathImage;
+//    }
 
     public String getmText1() {
         return mText1;
@@ -65,7 +81,7 @@ public class ExampleItem implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(this.pathImage, flags);
+//        dest.writeParcelable(this.pathImage, flags);
         dest.writeString(mText1);
         dest.writeString(mText2);
     }

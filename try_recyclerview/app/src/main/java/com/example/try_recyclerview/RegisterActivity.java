@@ -18,17 +18,17 @@ import java.io.IOException;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private static final int GALERY_REQUEST_CODE = 1;
-    public static final String IMAGE_KEY = "image";
-    private static final String TAG = RegisterActivity.class.getCanonicalName();
+//    private static final int GALERY_REQUEST_CODE = 1;
+//    public static final String IMAGE_KEY = "image";
+//    private static final String TAG = RegisterActivity.class.getCanonicalName();
     private static final String TITLE = "title";
     private static final String SUB_TITLE = "sub_title";
 
-    private Uri imageUri;
-    private Bitmap bitmap = null;
+//    private Uri imageUri;
+//    private Bitmap bitmap = null;
+//    private ImageView image;
     private EditText line1;
     private EditText line2;
-    private ImageView image;
     private int index;
     ExampleItem item;
 
@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         //Binding with the .xml
         line1 = findViewById(R.id.data_input1);
         line2 = findViewById(R.id.data_input2);
-        image = findViewById(R.id.avatar);
+//        image = findViewById(R.id.avatar);
 
         //Building parcelable
         Bundle extras = getIntent().getExtras();
@@ -88,24 +88,29 @@ public class RegisterActivity extends AppCompatActivity {
         String txt1 = line1.getText().toString();
         String txt2 = line2.getText().toString();
 //        Uri path = imageUri;
+        item.setmText1(txt1);
+        item.setmText2(txt2);
 
-        Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
-        intent.putExtra(TITLE,txt1);
-        intent.putExtra(SUB_TITLE,txt2);
-        startActivity(intent);
+        if(txt1.isEmpty())
+        {
+            line1.setError("ISI TERLEBIH DAHULU");
+        }else if(txt2.isEmpty())
+        {
+            line2.setError("ISI TERLEBIH DAHULU");
+        }else
+            {
+                Intent intent = new Intent();
+                intent.putExtra(MainActivity.KEY, item);
+                intent.putExtra(MainActivity.INDEX_KEY,index);
+                setResult(RESULT_OK,intent);
+                finish();
+            }
+
+//        Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+//        intent.putExtra(TITLE,txt1);
+//        intent.putExtra(SUB_TITLE,txt2);
+//        startActivity(intent);
+//        startActivity(intent);
 //        Intent intent = new Intent();
-//
-//        if(!txt1.isEmpty() || !txt2.isEmpty())
-//        {
-//            intent.putExtra(MainActivity.KEY, item);
-//            intent.putExtra(MainActivity.INDEX_KEY, index);
-////            intent.putExtra(MainActivity.IMAGE_KEY,path);
-//            setResult(RESULT_OK,intent);
-//            finish();
-//        }else
-//            {
-//                Toast.makeText(this, "Data harus di lengkapi", Toast.LENGTH_SHORT).show();
-//            }
-////        ExampleItem exampleItem = new ExampleItem(path,txt1,txt2);
     }
 }
