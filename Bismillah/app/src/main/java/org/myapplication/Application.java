@@ -10,7 +10,7 @@ public class Application extends android.app.Application {
     @Override
     public void onCreate(){
         super.onCreate();
-        account = new Account("M Darryl MC");
+        account = new Account("\n M Darryl MC");
         session = new Session(this);
     }
 
