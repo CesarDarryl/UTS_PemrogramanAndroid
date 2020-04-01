@@ -4,10 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Transaction implements Parcelable{
+    //TODO : Adding the new Button the check type
     public enum Type {
         EMPTY,
         DEBIT,
-        CREDIT
+        CREDIT,
+        DAGING,
+        SWORD
     }
 
     private String description;

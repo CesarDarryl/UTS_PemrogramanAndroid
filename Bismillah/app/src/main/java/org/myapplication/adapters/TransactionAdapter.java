@@ -55,9 +55,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         public void bind(final int index, final Transaction item) {
             descriptionText.setText(item.getDescription());
-            Locale localeID = new Locale("in", "ID");
-            NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
-            amountText.setText(formatRupiah.format(item.getAmount()));
+//            Locale localeID = new Locale("in", "ID");
+//            NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+//            amountText.setText(formatRupiah.format(item.getAmount()));
+            amountText.setText(String.valueOf(item.getAmount()));
             // TODO: Tambahkan interaksi click di sini
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -68,12 +69,20 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
             String trans = amountText.getText().toString();
 
+            //TODO : Change it to the type in recyclerview---------------------
+            //tiap tambahin dari Transaction tambahin juga di sini .
             if (item.getType() == Transaction.Type.CREDIT){
                 amountText.setTextColor(Color.parseColor("#00ff1a"));
-                amountText.setText("+ " + trans);
+                amountText.setText("total item\t: " + trans);
             } else if (item.getType() == Transaction.Type.DEBIT){
-                amountText.setTextColor(Color.parseColor("#ff0000"));
-                amountText.setText("- " + trans);
+                amountText.setTextColor(Color.parseColor("#00ff1a"));
+                amountText.setText("total item\t: " + trans);
+            } else if(item.getType() == Transaction.Type.DAGING){
+                amountText.setTextColor(Color.parseColor("#00ff1a"));
+                amountText.setText("total item Daging\t: " + trans);
+            } else if(item.getType() == Transaction.Type.SWORD){
+                amountText.setTextColor(Color.parseColor("#00ff1a"));
+                amountText.setText("total item Sword\t: " + trans);
             }
         }
 

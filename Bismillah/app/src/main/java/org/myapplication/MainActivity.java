@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         transactionsView.setLayoutManager(layoutManager);
 
-        welcomeText.setText(String.format("Welcome %s", account.getName()));
+        welcomeText.setText(String.format("Welcome   %s", account.getName()));
         balanceText.setText(formatRupiah.format(account.getBalance()));
 
         session = Application.getSession();

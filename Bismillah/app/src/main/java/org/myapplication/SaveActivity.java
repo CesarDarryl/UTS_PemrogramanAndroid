@@ -36,10 +36,17 @@ public class SaveActivity extends AppCompatActivity {
             descriptionInput.setText(item.getDescription());
             amountInput.setText(String.valueOf(item.getAmount()));
 
+            //TODO : This section is handle Radio Button.
+            //you can change it to the item that we need
             if (item.getType() == Transaction.Type.DEBIT){
-                typeRadioGroup.check(R.id.radio_debit);
+                typeRadioGroup.check(R.id.radio_debit);//this is Binding to the .xml
             } else if (item.getType() == Transaction.Type.CREDIT){
-                typeRadioGroup.check(R.id.radio_credit);
+                typeRadioGroup.check(R.id.radio_credit);//this is Binding to the .xml
+            } else if (item.getType() == Transaction.Type.DAGING){
+                typeRadioGroup.check(R.id.radio_daging);//this is Binding to the .xml
+            } else if (item.getType() == Transaction.Type.SWORD)
+            {
+                typeRadioGroup.check(R.id.radio_sword);//this is Binding to the .xml
             }
         }
     }
@@ -49,7 +56,12 @@ public class SaveActivity extends AppCompatActivity {
             return Transaction.Type.DEBIT;
         } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_credit){
             return Transaction.Type.CREDIT;
+        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_daging){
+            return Transaction.Type.DAGING;
+        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_sword){
+            return Transaction.Type.SWORD;
         }
+        //TODO : ADD ELSE IF TO ADDING A NEW ITEM
         return Transaction.Type.EMPTY;
     }
 
