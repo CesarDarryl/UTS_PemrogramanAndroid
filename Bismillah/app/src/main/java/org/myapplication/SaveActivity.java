@@ -38,28 +38,31 @@ public class SaveActivity extends AppCompatActivity {
 
             //TODO : This section is handle Radio Button.
             //you can change it to the item that we need
-            if (item.getType() == Transaction.Type.DEBIT){
-                typeRadioGroup.check(R.id.radio_debit);//this is Binding to the .xml
-            } else if (item.getType() == Transaction.Type.CREDIT){
-                typeRadioGroup.check(R.id.radio_credit);//this is Binding to the .xml
+            if (item.getType() == Transaction.Type.GUN){
+                typeRadioGroup.check(R.id.radio_gun);//this is Binding to the .xml
+            } else if (item.getType() == Transaction.Type.HEAL){
+                typeRadioGroup.check(R.id.radio_heal);//this is Binding to the .xml
             } else if (item.getType() == Transaction.Type.DAGING){
                 typeRadioGroup.check(R.id.radio_daging);//this is Binding to the .xml
-            } else if (item.getType() == Transaction.Type.SWORD)
-            {
+            } else if (item.getType() == Transaction.Type.SWORD){
                 typeRadioGroup.check(R.id.radio_sword);//this is Binding to the .xml
+            }else if (item.getType() == Transaction.Type.CHEST){
+                typeRadioGroup.check(R.id.radio_box);//this is Binding to the .xml
             }
         }
     }
 
     private Transaction.Type getCheckedType(){
-        if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_debit){
-            return Transaction.Type.DEBIT;
-        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_credit){
-            return Transaction.Type.CREDIT;
+        if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_gun){
+            return Transaction.Type.GUN;
+        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_heal){
+            return Transaction.Type.HEAL;
         } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_daging){
             return Transaction.Type.DAGING;
         } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_sword){
             return Transaction.Type.SWORD;
+        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_box){
+            return Transaction.Type.CHEST;
         }
         //TODO : ADD ELSE IF TO ADDING A NEW ITEM
         return Transaction.Type.EMPTY;

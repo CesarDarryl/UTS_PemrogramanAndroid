@@ -10,7 +10,10 @@ public class Transaction implements Parcelable{
         DEBIT,
         CREDIT,
         DAGING,
-        SWORD
+        SWORD,
+        GUN,
+        HEAL,
+        CHEST
     }
 
     private String description;

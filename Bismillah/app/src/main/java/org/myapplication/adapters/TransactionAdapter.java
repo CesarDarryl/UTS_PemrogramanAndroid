@@ -71,18 +71,21 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
             //TODO : Change it to the type in recyclerview---------------------
             //tiap tambahin dari Transaction tambahin juga di sini .
-            if (item.getType() == Transaction.Type.CREDIT){
+            if (item.getType() == Transaction.Type.GUN){
                 amountText.setTextColor(Color.parseColor("#00ff1a"));
-                amountText.setText("total item\t: " + trans);
-            } else if (item.getType() == Transaction.Type.DEBIT){
+                amountText.setText("qty Gun\t: " + trans);
+            } else if (item.getType() == Transaction.Type.HEAL){
                 amountText.setTextColor(Color.parseColor("#00ff1a"));
-                amountText.setText("total item\t: " + trans);
+                amountText.setText("qty Heal\t: " + trans);
             } else if(item.getType() == Transaction.Type.DAGING){
                 amountText.setTextColor(Color.parseColor("#00ff1a"));
-                amountText.setText("total item Daging\t: " + trans);
+                amountText.setText("qty Daging\t: " + trans);
             } else if(item.getType() == Transaction.Type.SWORD){
                 amountText.setTextColor(Color.parseColor("#00ff1a"));
-                amountText.setText("total item Sword\t: " + trans);
+                amountText.setText("qty Sword\t: " + trans);
+            } else if(item.getType() == Transaction.Type.CHEST){
+                amountText.setTextColor(Color.parseColor("#00ff1a"));
+                amountText.setText("qty Chest\t: " + trans);
             }
         }
 

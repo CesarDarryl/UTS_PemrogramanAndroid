@@ -34,14 +34,16 @@ public class Account {
     //rencana : jadi setiap benda di ada harganya dan di set di sini
     //Berlaku untuk ADD,UPDATE,DELETE
     public void addTransaction(Transaction transaction) {
-        if (transaction.getType() == Transaction.Type.CREDIT) {
-            balance += transaction.getAmount();
-        } else if (transaction.getType() == Transaction.Type.DEBIT) {
-            balance -= transaction.getAmount();
+        if (transaction.getType() == Transaction.Type.GUN) {
+            balance += transaction.getAmount()*75000;
+        } else if (transaction.getType() == Transaction.Type.HEAL) {
+            balance += transaction.getAmount()*10000;
         } else if (transaction.getType() == Transaction.Type.DAGING) {
-            balance += transaction.getAmount();
+            balance += transaction.getAmount()*7000;
         } else if (transaction.getType() == Transaction.Type.SWORD){
-            balance += transaction.getAmount();
+            balance += transaction.getAmount()*40000;
+        } else if (transaction.getType() == Transaction.Type.CHEST){
+            balance += transaction.getAmount()*5000;
         }
         this.transactions.add(transaction);
     }
@@ -50,14 +52,16 @@ public class Account {
     // balance -= transaction.getAmount(); karena total yg harus di bayar di kurangi
     public void removeTransaction(int index) {
         Transaction transaction = transactions.get(index);
-        if (transaction.getType() == Transaction.Type.CREDIT) {
-            balance -= transaction.getAmount();
-        } else if (transaction.getType() == Transaction.Type.DEBIT){
-            balance += transaction.getAmount();
+        if (transaction.getType() == Transaction.Type.GUN) {
+            balance -= transaction.getAmount()*75000;
+        } else if (transaction.getType() == Transaction.Type.HEAL){
+            balance -= transaction.getAmount()*10000;
         } else if (transaction.getType() == Transaction.Type.DAGING) {
-            balance -= transaction.getAmount();
+            balance -= transaction.getAmount()*7000;
         } else if (transaction.getType() == Transaction.Type.SWORD){
-            balance -= transaction.getAmount();
+            balance -= transaction.getAmount()*40000;
+        } else if (transaction.getType() == Transaction.Type.CHEST){
+            balance -= transaction.getAmount()*5000;
         }
         this.transactions.remove(transaction);
     }
@@ -68,14 +72,16 @@ public class Account {
         for (Transaction t : this.transactions) {
             // pada update, statment nya masing2 harga . jadi nantik harga di kali tiap harga per type mengikuti di update nya
             //statment nya sama sperti add transaction
-            if (t.getType() == Transaction.Type.CREDIT) {
-                balance += t.getAmount();
-            } else if (transaction.getType() == Transaction.Type.DEBIT){
-                balance -= t.getAmount();
+            if (t.getType() == Transaction.Type.GUN) {
+                balance += t.getAmount()*75000;
+            } else if (transaction.getType() == Transaction.Type.HEAL){
+                balance += t.getAmount()*10000;
             } else if (transaction.getType() == Transaction.Type.DAGING) {
-                balance += t.getAmount();
+                balance += t.getAmount()*7000;
             } else if (transaction.getType() == Transaction.Type.SWORD){
-                balance += t.getAmount();
+                balance += t.getAmount()*40000;
+            } else if (transaction.getType() == Transaction.Type.CHEST){
+                balance += t.getAmount()*5000;
             }
         }
     }
