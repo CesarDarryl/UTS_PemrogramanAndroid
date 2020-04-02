@@ -82,7 +82,7 @@ public class SaveActivity extends AppCompatActivity {
         } else if (String.valueOf(amount).isEmpty()){
             amountInput.setError("Isi terlebih dahulu");
         } else if (getCheckedType() == Transaction.Type.EMPTY){
-            Toast.makeText(getApplicationContext(), "Pilih jenis transaksi dahulu",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), " Pilih Item ",Toast.LENGTH_LONG).show();
         } else {
             Intent intent = new Intent();
             intent.putExtra(MainActivity.TRANSACTION_KEY, item);

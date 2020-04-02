@@ -10,15 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<!--        <activity android:name=".SplashScreenActivity"></activity>-->
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/preferences" />
 
         <activity android:name=".SaveActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".SettingsActivity"/>
+        <activity android:name=".SettingsActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashScreenActivity"
             android:label="Bismillah"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
