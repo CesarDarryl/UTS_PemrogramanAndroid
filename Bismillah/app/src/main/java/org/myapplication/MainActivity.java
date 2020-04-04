@@ -13,7 +13,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -40,6 +42,13 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
     private Locale localeID = new Locale("in", "ID");
     private NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
     private Session session;
+    boolean confirm = true;
+    private int currentBalance;
+    private Button resetButton;
+
+    public boolean isConfirm() {
+        return this.confirm;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
         welcomeText = findViewById(R.id.text_welcome);
         balanceText = findViewById(R.id.text_balance);
         transactionsView = findViewById(R.id.rv_transactions);
+        resetButton = findViewById(R.id.button);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +108,14 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
                 int index = viewHolder.getAdapterPosition();
                 account.removeTransaction(index);
                 adapter.notifyDataSetChanged();
-                balanceText.setText(formatRupiah.format(account.getBalance()));
+                if(confirm)
+                {
+                    resetButton.setVisibility(View.INVISIBLE); //To set visible
+                    balanceText.setText(formatRupiah.format(account.getBalance()));
+                }else
+                    {
+                        balanceText.setText(formatRupiah.format(account.getBalance()));
+                    }
             }
         };
 
@@ -160,8 +177,28 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
             }
             adapter.notifyDataSetChanged();
             balanceText.setText(formatRupiah.format(account.getBalance()));
+            resetButton.setVisibility(View.VISIBLE); //To set visible
         }
     }
 
-
+    public void handleSendToInvent(View view) {
+        if(adapter.getItemCount() == 0)
+        {
+            Toast.makeText(this, "ANDA BELUM BELI SESUATU", Toast.LENGTH_SHORT).show();
+            resetButton.setVisibility(View.INVISIBLE); //To set visible
+            confirm = true;
+        }else
+            {
+                confirm = false;
+                if(account.getBalance() >= 0 )
+                {
+                    currentBalance = account.getBalance();
+                    Toast.makeText(this, "SUKSES MASUK INVENTORY", Toast.LENGTH_SHORT).show();
+                    resetButton.setVisibility(View.INVISIBLE); //To set visible
+                }else
+                {
+                    Toast.makeText(this, "Balance GAK CUKUP", Toast.LENGTH_SHORT).show();
+                }
+            }
+    }
 }
