@@ -43,12 +43,7 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
     private NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
     private Session session;
     boolean confirm = true;
-    private int currentBalance;
     private Button resetButton;
-
-    public boolean isConfirm() {
-        return this.confirm;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
             @Override
             public void onClick(View view) {
                 // TODO: Tambahkan event click fab di sini
+                confirm = true;
                 Intent intent = new Intent(MainActivity.this, SaveActivity.class);
                 intent.putExtra(TRANSACTION_KEY, new Transaction());
                 startActivityForResult(intent, INSERT_REQUEST);
@@ -106,16 +102,11 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int index = viewHolder.getAdapterPosition();
-                account.removeTransaction(index);
                 adapter.notifyDataSetChanged();
-                if(confirm)
-                {
-                    resetButton.setVisibility(View.INVISIBLE); //To set visible
-                    balanceText.setText(formatRupiah.format(account.getBalance()));
-                }else
-                    {
-                        balanceText.setText(formatRupiah.format(account.getBalance()));
-                    }
+                account.removeTransaction(index);
+                resetButton.setVisibility(View.INVISIBLE); //To set visible
+                balanceText.setText(formatRupiah.format(account.getBalance()));
+
             }
         };
 
@@ -134,7 +125,14 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
         Intent intent = new Intent(this, SaveActivity.class);
         intent.putExtra(TRANSACTION_KEY, item);
         intent.putExtra(INDEX_KEY, index);
-        startActivityForResult(intent, UPDATE_REQUEST);
+        if(confirm)
+        {
+            startActivityForResult(intent, UPDATE_REQUEST);
+        }else
+            {
+                startActivityForResult(intent, INSERT_REQUEST);
+                confirm = true;
+            }
     }
 
     @Override
@@ -189,15 +187,14 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
             confirm = true;
         }else
             {
+                Toast.makeText(this, "SUKSES MASUK INVENTORY", Toast.LENGTH_SHORT).show();
+                resetButton.setVisibility(View.INVISIBLE); //To set visible
                 confirm = false;
-                if(account.getBalance() >= 0 )
+                for(int i = 0; i <= adapter.getingItem() ; i++)
                 {
-                    currentBalance = account.getBalance();
-                    Toast.makeText(this, "SUKSES MASUK INVENTORY", Toast.LENGTH_SHORT).show();
-                    resetButton.setVisibility(View.INVISIBLE); //To set visible
-                }else
-                {
-                    Toast.makeText(this, "Balance GAK CUKUP", Toast.LENGTH_SHORT).show();
+                    account.removeTransaction(i);
+                    adapter.notifyDataSetChanged();
+                    balanceText.setText(formatRupiah.format(0));
                 }
             }
     }

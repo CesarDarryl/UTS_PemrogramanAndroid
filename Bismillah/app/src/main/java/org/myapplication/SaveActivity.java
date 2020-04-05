@@ -77,6 +77,7 @@ public class SaveActivity extends AppCompatActivity {
         item.setAmount(amount);
         item.setType(type);
 
+
         if (description.isEmpty()){
             descriptionInput.setError("Isi terlebih dahulu");
         } else if (String.valueOf(amount).isEmpty()){

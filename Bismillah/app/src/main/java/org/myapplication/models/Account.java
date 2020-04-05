@@ -15,10 +15,12 @@ public class Account {
     private String name;
     private int balance;
     private List<Transaction> transactions;
+    private int curbalance;
 
     public Account(String name) {
         this.name = name;
-        this.balance = 100000;
+        this.balance = 0;
+        this.curbalance = 100000;
         this.transactions = new ArrayList<>();
     }
 
@@ -38,6 +40,15 @@ public class Account {
         return balance;
     }
 
+    public int getCurbalance()
+    {
+        return curbalance;
+    }
+
+    public void setCurbalance(int curbalance) {
+        this.curbalance = curbalance;
+    }
+
     public List<Transaction> getTransactions() {
         return transactions;
     }
@@ -47,16 +58,19 @@ public class Account {
     //Berlaku untuk ADD,UPDATE,DELETE
     public void addTransaction(Transaction transaction) {
             if (transaction.getType() == Transaction.Type.GUN) {
-                balance -= transaction.getAmount()*75000;
+                balance += transaction.getAmount()*75000;
             } else if (transaction.getType() == Transaction.Type.HEAL) {
-                balance -= transaction.getAmount()*10000;
+                balance += transaction.getAmount()*10000;
             } else if (transaction.getType() == Transaction.Type.DAGING) {
-                balance -= transaction.getAmount()*7000;
+                balance += transaction.getAmount()*7000;
             } else if (transaction.getType() == Transaction.Type.SWORD){
-                balance -= transaction.getAmount()*40000;
+                balance += transaction.getAmount()*40000;
             } else if (transaction.getType() == Transaction.Type.CHEST){
-                balance -= transaction.getAmount()*5000;
+                balance += transaction.getAmount()*5000;
             }
+            curbalance -= balance;
+            setCurbalance(curbalance);
+
             this.transactions.add(transaction);
     }
 
@@ -65,35 +79,36 @@ public class Account {
     public void removeTransaction(int index) {
         Transaction transaction = transactions.get(index);
         if (transaction.getType() == Transaction.Type.GUN) {
-            balance += transaction.getAmount()*75000;
+            balance -= transaction.getAmount()*75000;
         } else if (transaction.getType() == Transaction.Type.HEAL){
-            balance += transaction.getAmount()*10000;
+            balance -= transaction.getAmount()*10000;
         } else if (transaction.getType() == Transaction.Type.DAGING) {
-            balance += transaction.getAmount()*7000;
+            balance -= transaction.getAmount()*7000;
         } else if (transaction.getType() == Transaction.Type.SWORD){
-            balance += transaction.getAmount()*40000;
+            balance -= transaction.getAmount()*40000;
         } else if (transaction.getType() == Transaction.Type.CHEST){
-            balance += transaction.getAmount()*5000;
+            balance -= transaction.getAmount()*5000;
         }
+        setBalance(balance);
         this.transactions.remove(transaction);
     }
 
     public void updateTransaction(int index, Transaction transaction) {
         this.transactions.set(index, transaction);
-        this.balance = 100000;
+        this.balance = 0;
         for (Transaction t : this.transactions) {
             // pada update, statment nya masing2 harga . jadi nantik harga di kali tiap harga per type mengikuti di update nya
             //statment nya sama sperti add transaction
             if (t.getType() == Transaction.Type.GUN) {
-                balance -= t.getAmount()*75000;
+                balance += t.getAmount()*75000;
             } else if (transaction.getType() == Transaction.Type.HEAL){
-                balance -= t.getAmount()*10000;
+                balance += t.getAmount()*10000;
             } else if (transaction.getType() == Transaction.Type.DAGING) {
-                balance -= t.getAmount()*7000;
+                balance += t.getAmount()*7000;
             } else if (transaction.getType() == Transaction.Type.SWORD){
-                balance -= t.getAmount()*40000;
+                balance += t.getAmount()*40000;
             } else if (transaction.getType() == Transaction.Type.CHEST){
-                balance -= t.getAmount()*5000;
+                balance += t.getAmount()*5000;
             }
         }
     }
