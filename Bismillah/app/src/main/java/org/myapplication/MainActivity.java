@@ -109,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
                 account.removeTransaction(index);
                 resetButton.setVisibility(View.INVISIBLE); //To set visible
                 balanceText.setText(formatRupiah.format(account.getBalance()));
-
             }
         };
 

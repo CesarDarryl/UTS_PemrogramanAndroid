@@ -26,7 +26,8 @@
         </activity>
         <activity
             android:name=".SplashScreenActivity"
-            android:label="Bismillah"
+            android:label="Merchant_Shop"
+            android:icon="@drawable/icon"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
