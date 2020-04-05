@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
     private Session session;
     boolean confirm = true;
     private Button resetButton;
+    private TextView currency;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
         balanceText = findViewById(R.id.text_balance);
         transactionsView = findViewById(R.id.rv_transactions);
         resetButton = findViewById(R.id.button);
+        currency = findViewById(R.id.text_curbalance);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
 
         welcomeText.setText(String.format("Welcome   %s", account.getName()));
         balanceText.setText(formatRupiah.format(account.getBalance()));
+        currency.setText(formatRupiah.format(account.getCurbalance()));
 
         session = Application.getSession();
 
@@ -127,7 +130,9 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
         intent.putExtra(INDEX_KEY, index);
         if(confirm)
         {
-            startActivityForResult(intent, UPDATE_REQUEST);
+//            startActivityForResult(intent, UPDATE_REQUEST);
+            account.removeTransaction(index);
+            startActivityForResult(intent, INSERT_REQUEST);
         }else
             {
                 startActivityForResult(intent, INSERT_REQUEST);
@@ -169,9 +174,6 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
             Transaction transaction = data.getParcelableExtra(TRANSACTION_KEY);
             if (requestCode == INSERT_REQUEST) {
                 account.addTransaction(transaction);
-            } else if (requestCode == UPDATE_REQUEST) {
-                int index = data.getIntExtra(INDEX_KEY, 0);
-                account.updateTransaction(index, transaction);
             }
             adapter.notifyDataSetChanged();
             balanceText.setText(formatRupiah.format(account.getBalance()));
@@ -187,14 +189,19 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
             confirm = true;
         }else
             {
-                Toast.makeText(this, "SUKSES MASUK INVENTORY", Toast.LENGTH_SHORT).show();
-                resetButton.setVisibility(View.INVISIBLE); //To set visible
-                confirm = false;
-                for(int i = 0; i <= adapter.getingItem() ; i++)
+                if(account.getCurbalance() >= account.getBalance())
                 {
-                    account.removeTransaction(i);
-                    adapter.notifyDataSetChanged();
+                    Toast.makeText(this, "SUKSES MASUK INVENTORY", Toast.LENGTH_SHORT).show();
+                    resetButton.setVisibility(View.INVISIBLE); //To set visible
+                    confirm = false;
+                    int total = account.acounting();
+                    //put calling method clear
+                    adapter.clear();
                     balanceText.setText(formatRupiah.format(0));
+                    account.setBalance(0);
+                    currency.setText(formatRupiah.format(total));
+                }else{
+                    Toast.makeText(this, "UANG ANDA TIDAK CUKUP", Toast.LENGTH_SHORT).show();
                 }
             }
     }

@@ -1,21 +1,23 @@
 package org.myapplication.models;
 
-import android.content.Context;
-import android.widget.Toast;
-import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import org.myapplication.MainActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
     private String name;
     private int balance;
-    private List<Transaction> transactions;
     private int curbalance;
+
+
+    private List<Transaction> transactions;
+
+    public int getCurbalance() {
+        return curbalance;
+    }
+
+    public void setCurbalance(int curbalance) {
+        this.curbalance = curbalance;
+    }
 
     public Account(String name) {
         this.name = name;
@@ -40,15 +42,6 @@ public class Account {
         return balance;
     }
 
-    public int getCurbalance()
-    {
-        return curbalance;
-    }
-
-    public void setCurbalance(int curbalance) {
-        this.curbalance = curbalance;
-    }
-
     public List<Transaction> getTransactions() {
         return transactions;
     }
@@ -56,6 +49,16 @@ public class Account {
     //TODO : Add new type of getType (tipe transaksinya)
     //rencana : jadi setiap benda di ada harganya dan di set di sini
     //Berlaku untuk ADD,UPDATE,DELETE
+    public int acounting()
+    {
+        int price = getBalance();
+        int current = getCurbalance();
+        int total = 0;
+        total = current - price;
+        setCurbalance(total);
+        return total;
+    }
+
     public void addTransaction(Transaction transaction) {
             if (transaction.getType() == Transaction.Type.GUN) {
                 balance += transaction.getAmount()*75000;
@@ -68,10 +71,8 @@ public class Account {
             } else if (transaction.getType() == Transaction.Type.CHEST){
                 balance += transaction.getAmount()*5000;
             }
-            curbalance -= balance;
-            setCurbalance(curbalance);
-
             this.transactions.add(transaction);
+            setBalance(balance);
     }
 
     //jadi saat remove, balance harus berkurang
@@ -89,27 +90,6 @@ public class Account {
         } else if (transaction.getType() == Transaction.Type.CHEST){
             balance -= transaction.getAmount()*5000;
         }
-        setBalance(balance);
         this.transactions.remove(transaction);
-    }
-
-    public void updateTransaction(int index, Transaction transaction) {
-        this.transactions.set(index, transaction);
-        this.balance = 0;
-        for (Transaction t : this.transactions) {
-            // pada update, statment nya masing2 harga . jadi nantik harga di kali tiap harga per type mengikuti di update nya
-            //statment nya sama sperti add transaction
-            if (t.getType() == Transaction.Type.GUN) {
-                balance += t.getAmount()*75000;
-            } else if (transaction.getType() == Transaction.Type.HEAL){
-                balance += t.getAmount()*10000;
-            } else if (transaction.getType() == Transaction.Type.DAGING) {
-                balance += t.getAmount()*7000;
-            } else if (transaction.getType() == Transaction.Type.SWORD){
-                balance += t.getAmount()*40000;
-            } else if (transaction.getType() == Transaction.Type.CHEST){
-                balance += t.getAmount()*5000;
-            }
-        }
     }
 }

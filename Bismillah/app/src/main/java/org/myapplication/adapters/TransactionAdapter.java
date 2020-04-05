@@ -25,12 +25,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         this.listener = listener;
     }
 
-
-    public int getingItem()
-    {
-        return this.items.size();
-    }
-
     public interface OnItemTransactionListener{
         void onTransactionClicked(int index, Transaction item);
     }
@@ -54,6 +48,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         return (items != null) ? items.size() : 0;
     }
 
+    public void clear() {
+        int size = items.size();
+        items.clear();
+        notifyItemRangeRemoved(0, size);
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView descriptionText;
@@ -79,19 +78,19 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             //tiap tambahin dari Transaction tambahin juga di sini .
             if (item.getType() == Transaction.Type.GUN){
                 amountText.setTextColor(Color.parseColor("#00ff1a"));
-                amountText.setText("qty Gun\t: " + trans);
+                amountText.setText("qty Gun \t: " + trans);
             } else if (item.getType() == Transaction.Type.HEAL){
                 amountText.setTextColor(Color.parseColor("#00ff1a"));
-                amountText.setText("qty Heal\t: " + trans);
+                amountText.setText("qty Heal \t: " + trans);
             } else if(item.getType() == Transaction.Type.DAGING){
                 amountText.setTextColor(Color.parseColor("#00ff1a"));
-                amountText.setText("qty Daging\t: " + trans);
+                amountText.setText("qty Daging \t: " + trans);
             } else if(item.getType() == Transaction.Type.SWORD){
                 amountText.setTextColor(Color.parseColor("#00ff1a"));
-                amountText.setText("qty Sword\t: " + trans);
+                amountText.setText("qty Sword \t: " + trans);
             } else if(item.getType() == Transaction.Type.CHEST){
                 amountText.setTextColor(Color.parseColor("#00ff1a"));
-                amountText.setText("qty Chest\t: " + trans);
+                amountText.setText("qty Chest \t: " + trans);
             }
         }
 
